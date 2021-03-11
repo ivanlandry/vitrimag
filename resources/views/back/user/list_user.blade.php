@@ -4,15 +4,14 @@
 
 
 
-    <div class="col-md-12">
+    <div class="col-md-12 pt-4">
         <div class="card">
+            <!-- /.card-header -->
             <div class="card-header">
                 <h3 class="card-title">Liste des utilisateurs</h3>
-
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
-                <table class="table table-bordered">
+                <table  id="example" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
                     <tr>
                         <th style="width: 10px">#</th>
@@ -21,7 +20,6 @@
                         <th>Adresse email</th>
                         <th>Date d'inscription</th>
                         <th>Actions</th>
-                        <th style="width: 40px"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,26 +46,15 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}">&laquo;</a></li>
-                    @for($i=1;$i<=ceil($users->total() / $users->perPage());$i++)
-                        <li class="page-item"><a class="page-link" href="{{ $users->url($i) }}">{{$i}}</a></li>
-                    @endfor
-                    <li class="page-item"><a class="page-link" href="{{ $users->nextPageUrl() }}">&raquo;</a></li>
-                </ul>
-            </div>
+
         </div>
     </div>
 
     <!-- Modal de suppression d'un utilisateur -->
 
-
-
     <div class="modal fade" id="modal-danger">
         <div class="modal-dialog modal-sm">
-            <div class="modal-content bg-danger">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Supprimer un utilisateur</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -75,11 +62,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Voulez-vous vraiment le supprimer?</p>
+                    <p class="text-danger">
+                        Attention!!! cela entrainera également la suppression de toutes les annonces associées à cet
+                        utilisateur.
+                    </p>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-outline-light" id="btn_delete">Supprimer</button>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-outline-danger" id="btn_delete">Supprimer</button>
                 </div>
 
             </div>
@@ -95,9 +85,9 @@
 
     <script !src="">
 
-        @if(session()->get('message'))
-             toastr.success('Suppression réussie !');
 
+        @if(session()->get('message'))
+        toastr.success('{{ session()->get('message') }}');
             @endif
 
         var idDelete;

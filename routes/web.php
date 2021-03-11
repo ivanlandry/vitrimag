@@ -17,6 +17,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('annonce/ajouter', [\App\Http\Controllers\AnnonceController::class, 'create'])->name('add_annonce_get');
 Route::post('annonce/store', [\App\Http\Controllers\AnnonceController::class, 'store'])->name('add_annonce_post');
+Route::post('getSousCategorie/',[\App\Http\Controllers\AnnonceController::class,'getSousCategorie'])->name('getSousCategorie');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,7 +28,9 @@ Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::view('/', 'back.app')->name('admin');
     });
+    Route::get('page',[\App\Http\Controllers\back\PageController::class,'create'])->name('page');
     Route::resource('categories',\App\Http\Controllers\back\CategorieController::class);
+    Route::resource('sous-categories',\App\Http\Controllers\back\SousCategorieController::class);
     Route::resource('users',\App\Http\Controllers\back\UserController::class);
 });
 

@@ -15,8 +15,12 @@ class CreateAnnoncesTable extends Migration
     {
         Schema::create('annonces', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('categorie_id')->index();
+            $table->unsignedBigInteger('sous_category_id');
             $table->unsignedBigInteger('user_id')->index();
+
+            $table->foreign('sous_category_id')->references('id')->on('sous_categories')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
             $table->string('titre');
             $table->string('ville');
             $table->text('description');

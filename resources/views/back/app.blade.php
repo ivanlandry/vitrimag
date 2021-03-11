@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -56,7 +61,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
                     data-accordion="false">
 
-                    <li class="nav-item">
+                    <li class="nav-item pb-4">
                         <a href="{{ route('admin') }}" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -65,80 +70,69 @@
                         </a>
                     </li>
 
-                    <li class="nav-header">Gestion des utilisateurs</li>
-
                     <li class="nav-item">
                         <a href="{{ route('users.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-hand-point-right"></i>
                             <p>Liste des utilisateurs</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-hand-point-right"></i>
                             <p>Utilisateurs désactivés</p>
                         </a>
                     </li>
 
-                    <li class="nav-header">Gestion des annonces et categories</li>
-
                     <li class="nav-item">
                         <a href="{{ route('categories.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-hand-point-right"></i>
                             <p>Gestion des categories</p>
                         </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Liste des annonces</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Annonces désactivées</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Annonces en attentes</p>
+                        <a href="{{ route('sous-categories.index') }}" class="nav-link">
+                            <i class="far fa-hand-point-right"></i>
+                            <p>Gestion des sous-categories</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-envelope"></i>
-                            <p>
-                                Messages
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
+                            <i class="far fa-hand-point-right"></i>
+                            <p>Toutes es annonces  <span class="badge bg-primary">3</span> </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="pages/mailbox/mailbox.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Envoyés</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/mailbox/compose.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Non lues</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Lues</p>
-                                </a>
-                            </li>
-                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-hand-point-right"></i>
+                            <p>Annonces désactivées  <span title="3 New Messages" class="badge bg-info">3</span></p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-hand-point-right"></i>
+                            <p>Annonces en attentes  <span  class="badge bg-danger">3</span></p>
+                        </a>
                     </li>
 
-                    <li class="nav-header">Paramètres</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-hand-point-right"></i>
+                            <p>FAQ</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('page') }}" class="nav-link">
+                            <i class="far fa-hand-point-right"></i>
+                            <p>Pages</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-hand-point-right"></i>
+                            <p>Paramètres du site</p>
+                        </a>
+                    </li>
 
                 </ul>
             </nav>
@@ -146,6 +140,8 @@
         </div>
         <!-- /.sidebar -->
     </aside>
+
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -197,6 +193,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap.min.js"></script>
+<script !src="">
+
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "language": {
+                "lengthMenu": "Afficher  _MENU_ lignes par page",
+                "zeroRecords": "aucun resultat trouvé",
+                "info": " page _PAGE_ sur _PAGES_",
+                "infoEmpty": "pas de données disponibles",
+                "infoFiltered": "(filtré de _MAX_ entrées au total)",
+                "search":"rechercher",
+                "paginate":{
+                    'previous':'precedent',
+                    'next':'suivant'
+                }
+            }
+        });
+    } );
+</script>
 @yield('extra-script')
 </body>
 </html>
