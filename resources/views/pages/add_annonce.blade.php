@@ -148,7 +148,7 @@
                     }
                 })
                     .done((data) => {
-                        console.log('ff');
+
                         data.forEach(item => $('#sous_categories').append(`<option value="${item.id}">${item.titre}</option>`));
 
                     })
