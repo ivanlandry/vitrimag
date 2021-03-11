@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddAnnonceRequest;
 use App\Models\Annonce;
 use App\Models\Category;
+use App\Models\SousCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,23 +63,13 @@ class AnnonceController extends Controller
             'img_3' => 'required|image|max:5000',
         ]);
 
-        $category = Category::where('id', $request->input(['category_id']))->first()->id;
+        $annonce = Auth::user()->annonces()->create($data);
 
-        if (Auth::user()) {
-            $user = Auth::user();
+        $annonce->sous_category()->associate(SousCategory::where('id', $request->input(['sous_category_id']))->first()->id);
 
-            $annonce = $user->annonces()->create($data);
-            $annonce->category()->associate($category);
+        $this->storeImage($annonce);
 
-            $this->storeImage($annonce);
-
-            return redirect()->back()->with('message_add_annonce', 'votre annonce a bien étée  créée');
-
-        } else {
-            // session(['data' => $data, 'categorie_id' => $categorie_id]);
-
-            return redirect()->route('login');
-        }
+        return redirect()->back()->with('message_add_annonce', 'votre annonce a bien étée  créée');
 
     }
 
@@ -91,6 +82,18 @@ class AnnonceController extends Controller
                 'img_3' => request('img_3')->store('annonces', 'public'),
             ]);
         }
+    }
+
+    public function getSousCategorie(Request $request)
+    {
+
+        if ($request->ajax()) {
+
+            $sous_categories = Category::find((int)$request->post('id_categorie'))->sous_categories()->get();
+
+            return response()->json($sous_categories);
+        }
+        abort(404);
     }
 
     /**

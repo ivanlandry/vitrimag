@@ -47,10 +47,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="job-region">Catégorie</label>
-                            <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
+                            <label for="categorie">Catégorie</label>
+                            <select class="selectpicker border rounded" id="categorie" data-style="btn-black"
                                     data-width="100%" data-live-search="true" title="choisir une categorie"
-                                    name="category_id" required>
+                                    required>
                                 @foreach($categories as $categorie)
                                     <option value="{{ $categorie->id }}">{{ $categorie->titre }}</option>
                                 @endforeach
@@ -58,9 +58,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="job-region">Sous catégorie</label>
-                            <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
-                                    data-width="100%" data-live-search="true" title="choisir une categorie"
+                            <label for="sous_categories">Sous catégorie</label>
+                            <select class="form-control border rounded" id="sous_categories"
+                                    data-width="100%" data-live-search="true" title="choisir une sous categorie"
                                     name="sous_category_id" required>
 
                             </select>
@@ -98,16 +98,16 @@
 
                         <div class="form-group">
                             <label for="company-website-tw d-block">Choisir des photos</label> <br>
-                            <input class=" form-control @error('img_1') is-invalid @enderror" type="file" name="img_1"
+                            <input class=" form-control-file @error('img_1') is-invalid @enderror" type="file" name="img_1"
                                    required>
                             @error('img1')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror<br>
-                            <input class=" form-control @error('img_2') is-invalid @enderror" type="file" name="img_2">
+                            <input class=" form-control-file @error('img_2') is-invalid @enderror" type="file" name="img_2">
                             @error('img2')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror<br>
-                            <input class=" form-control @error('img_3') is-invalid @enderror" type="file" name="img_3">
+                            <input class=" form-control-file @error('img_3') is-invalid @enderror" type="file" name="img_3">
                             @error('img3')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -134,8 +134,33 @@
 @endsection
 @section('extra-script')
     <script !src="">
-        @if(session()->get('message_add_annonce'))
+
+        $(function () {
+
+            $('#categorie').change(function () {
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('getSousCategorie') }}',
+                    data: {
+                        'id_categorie': $('#categorie option:selected').attr('value'),
+                        '_token': '{{ csrf_token() }}'
+                    }
+                })
+                    .done((data) => {
+                        data.forEach(item => $('#sous_categories').append(`<option value="${item.id}">${item.titre}</option>`));
+
+                    })
+                    .fail((error) => {
+                        console.log(error);
+                    });
+            });
+
+            @if(session()->get('message_add_annonce'))
             toastr.success('{{ session()->get('message_add_annonce') }}');
-        @endif
+            @endif
+        });
+
+
     </script>
 @endsection
