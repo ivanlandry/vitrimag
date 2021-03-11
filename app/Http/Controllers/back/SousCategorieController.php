@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\back;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Category;
+use App\Models\SousCategory;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class SousCategorieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
-       $users = User::all();
 
-        return view('back/user/list_user',['users'=>$users]);
+        $categories = Category::all();
+        $sousCategorie = SousCategory::with('category')->get();
+
+        return view('back/annonce/categorie/sous_categorie', ['categories' => $categories, 'sousCategories' => $sousCategorie]);
     }
 
     /**
@@ -33,18 +36,23 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        SousCategory::create([
+            'titre' => $request->input('titre'),
+            'category_id' => $request->input('categorie')
+        ])->category()->associate(Category::find($request->input('categorie')));
+
+        return redirect()->back()->with('message_add', 'sous catégorie enrégistrée! ');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -55,7 +63,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -66,8 +74,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -78,13 +86,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        User::destroy($id);
-
-        return redirect()->back()->with('message','suppression réussie');
+        SousCategory::destroy($id);
+        return redirect()->back()->with('message_delete', 'suppression reussie');
     }
 }

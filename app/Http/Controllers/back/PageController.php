@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\back;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-       $users = User::all();
-
-        return view('back/user/list_user',['users'=>$users]);
+        //
     }
 
     /**
@@ -25,11 +22,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('back/page/page');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -83,8 +78,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-
-        return redirect()->back()->with('message','suppression réussie');
+        //
     }
 }

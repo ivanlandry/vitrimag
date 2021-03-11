@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categorie extends Model
+class SousCategory extends Model
 {
     use HasFactory;
 
     protected $guarded=[];
 
-    public function annonces(){
-        return $this->hasMany(Annonce::class);
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
-
 }

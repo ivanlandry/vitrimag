@@ -96,7 +96,7 @@
 
                         <div class="row form-group mb-4 ml-5">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <input type="submit" value="Se connecter" class="btn px-4 btn-primary text-white w-75 ">
+                                <input type="submit" value="Creer mon compte" class="btn px-4 btn-primary text-white w-75 ">
                             </div>
                         </div>
 

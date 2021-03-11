@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -35,7 +36,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::user()->roles()->pluck('nom')->contains('admin'))
             return redirect()->intended(RouteServiceProvider::ADMIN);
         else
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended(RouteServiceProvider::HOME)->with('message_auth','Bienvenue '.Auth::user()->name.'!');
     }
 
     /**
@@ -46,6 +47,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        if (session()->get('data')){
+            dd(session()->get('data'));
+        }
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

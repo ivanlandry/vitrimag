@@ -26,13 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="row">
-                        <div class="col-6 offset-5">
-                            <a href="#" class="btn btn-block btn-primary btn-md">Sauvegarder</a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="row mb-5">
                 <div class="col-lg-12">
@@ -56,56 +50,80 @@
                             <label for="job-region">Catégorie</label>
                             <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
                                     data-width="100%" data-live-search="true" title="choisir une categorie"
-                                    name="categorie" required>
-                                <option>Anywhere</option>
-                                <option>San Francisco</option>
-                                <option>Palo Alto</option>
-                                <option>New York</option>
-                                <option>Manhattan</option>
-                                <option>Ontario</option>
-                                <option>Toronto</option>
-                                <option>Kansas</option>
-                                <option>Mountain View</option>
+                                    name="category_id" required>
+                                @foreach($categories as $categorie)
+                                    <option value="{{ $categorie->id }}">{{ $categorie->titre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-region">Sous catégorie</label>
+                            <select class="selectpicker border rounded" id="job-region" data-style="btn-black"
+                                    data-width="100%" data-live-search="true" title="choisir une categorie"
+                                    name="sous_category_id" required>
+
                             </select>
                         </div>
 
                         <h4 class="text-black mb-5 border-bottom pb-2">Détails de l'annonce</h4>
                         <div class="form-group">
                             <label for="job-title">Titre</label>
-                            <input type="text" class="form-control" id="titre" placeholder="Titre" name="titre"
+                            <input type="text" class="form-control @error('titre') is-invalid @enderror" id="titre"
+                                   placeholder="Titre" name="titre"
                                    required>
+                            @error('titre')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="job-location">Prix</label>
-                            <input type="number" class="form-control" id="job-location" placeholder="FCFA" name="prix"
+                            <input type="number" class="form-control @error('prix') is-invalid @enderror"
+                                   id="job-location" placeholder="FCFA" name="prix"
                                    required>
+                            @error('prix')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="job-description">Description</label>
-                            <textarea class="form-control" name="description" rows="5"
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description"
+                                      rows="5"
                                       placeholder="Description- Donnez plus de détails possible sur votre aticle"></textarea>
+                            @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="company-website-tw d-block">Choisir des photos</label> <br>
-                            <input class=" form-control" type="file" name="img1"><br>
-                            <input class=" form-control" type="file" name="img2"><br>
-                            <input class=" form-control" type="file" name="img3">
+                            <input class=" form-control @error('img_1') is-invalid @enderror" type="file" name="img_1"
+                                   required>
+                            @error('img1')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror<br>
+                            <input class=" form-control @error('img_2') is-invalid @enderror" type="file" name="img_2">
+                            @error('img2')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror<br>
+                            <input class=" form-control @error('img_3') is-invalid @enderror" type="file" name="img_3">
+                            @error('img3')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="row align-items-center mb-5">
                             <div class="col-lg-4 ml-auto">
                                 <div class="row">
                                     <div class="col-6 offset-5">
-                                        <button type="submit" id="ff" class="btn btn-block btn-primary btn-md">
-                                            Sauvegarder
+                                        <button type="submit" id="ff" class="btn btn-block btn-primary">
+                                            Creer l'annonce
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -114,4 +132,10 @@
     </section>
 
 @endsection
-
+@section('extra-script')
+    <script !src="">
+        @if(session()->get('message_add_annonce'))
+            toastr.success('{{ session()->get('message_add_annonce') }}');
+        @endif
+    </script>
+@endsection

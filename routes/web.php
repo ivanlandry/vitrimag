@@ -27,7 +27,9 @@ Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::view('/', 'back.app')->name('admin');
     });
+    Route::get('page',[\App\Http\Controllers\back\PageController::class,'create'])->name('page');
     Route::resource('categories',\App\Http\Controllers\back\CategorieController::class);
+    Route::resource('sous-categories',\App\Http\Controllers\back\SousCategorieController::class);
     Route::resource('users',\App\Http\Controllers\back\UserController::class);
 });
 

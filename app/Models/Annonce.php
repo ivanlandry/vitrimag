@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Annonce extends Model
 {
     use HasFactory;
+
     protected $guarded=[];
 
-    public function categorie(){
-        return $this->belongsTo(Categorie::class);
+    public function sous_category(){
+        return $this->belongsTo(Category::class);
     }
     public function user(){
         return $this->belongsTo(User::class);
