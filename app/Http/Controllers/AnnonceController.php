@@ -104,7 +104,13 @@ class AnnonceController extends Controller
      */
     public function show($id)
     {
-        //
+        $annonce = Annonce::find($id);
+
+        $annonces_similaires = SousCategory::find($annonce->sous_category->id);
+
+      //  dd($annonce_similaires->annonces);
+
+        return view('pages/show_annonce' ,['annonce'=>$annonce,'annonces_similaires'=>$annonces_similaires->annonces]);
     }
 
     /**
@@ -123,8 +129,7 @@ class AnnonceController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+     * @return \Illuminate\Http\Response     */
     public function update(Request $request, $id)
     {
         //

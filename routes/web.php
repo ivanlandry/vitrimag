@@ -14,9 +14,12 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('annonce/ajouter', [\App\Http\Controllers\AnnonceController::class, 'create'])->name('add_annonce_get');
 Route::post('annonce/store', [\App\Http\Controllers\AnnonceController::class, 'store'])->name('add_annonce_post');
+Route::get('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'show'])->name('show_annonce');
+Route::get('annonce/', [\App\Http\Controllers\AnnonceController::class, 'index'])->name('all_annonce');
+
 Route::post('getSousCategorie/',[\App\Http\Controllers\AnnonceController::class,'getSousCategorie'])->name('getSousCategorie');
 
 Route::get('/dashboard', function () {

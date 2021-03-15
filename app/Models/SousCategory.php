@@ -14,4 +14,8 @@ class SousCategory extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+
+    public function annonces(){
+        return $this->hasMany(Annonce::class);
+    }
 }

@@ -10,157 +10,61 @@
 
 
     <section class="site-section">
+
         <div class="container">
 
             <div class="row mb-5 justify-content-center">
                 <div class="col-md-7 text-center">
-                    <h2 class="section-title mb-2">43,167 Job Listed</h2>
+                    <h2 class="section-title mb-2">Decouvrez nos catégories</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach($categories as $categorie)
+                    <div class=" col-md-3" style="width: 15rem;">
+                        <img src="{{ asset('storage/'.$categorie->image) }}" class="card-img-top" alt="" width="10" height="180">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="#" class="text-dark" style="text-decoration: none;"><strong>{{ $categorie->titre }}</strong></a></h5>
+                            @foreach( $categorie->sous_categories as $sous_categorie)
+                                <p class="card-text"><a href="" class="text-dark" style="text-decoration: none;">{{ $sous_categorie->titre}}</a></p>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <h2 class="section-title mb-2">Annonces récentes</h2>
                 </div>
             </div>
 
             <ul class="job-listings mb-5">
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="job-single.html"></a>
-                    <div class="job-listing-logo">
-                        <img src="images/job_logo_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                    </div>
+                @foreach($annonces as $annonce)
+                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                        <a href="{{ route('show_annonce',$annonce) }}"></a>
+                        <div class="job-listing-logo">
+                            <img src="{{ asset('storage/'.$annonce->img_1) }}"
+                                 alt="Free Website Template by Free-Template.co"
+                                 class="img-fluid" style="width: 100px; height: 100px;">
+                        </div>
 
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2>Product Designer</h2>
-                            <strong>Adidas</strong>
+                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                <h2>{{$annonce->titre}}</h2>
+                                <strong>{{ $annonce->sous_category->titre }}</strong>
+                            </div>
+                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                <span class="icon-room"></span> {{ $annonce->ville }}
+                            </div>
+                            <div class="job-listing-meta">
+                                <span class="badge badge-danger">publié le {{ $annonce->created_at }}</span>
+                            </div>
                         </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> New York, New York
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-danger">Part Time</span>
-                        </div>
-                    </div>
-
-                </li>
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="job-single.html"></a>
-                    <div class="job-listing-logo">
-                        <img src="images/job_logo_2.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                    </div>
-
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2>Digital Marketing Director</h2>
-                            <strong>Sprint</strong>
-                        </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> Overland Park, Kansas
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-success">Full Time</span>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="job-single.html"></a>
-                    <div class="job-listing-logo">
-                        <img src="images/job_logo_3.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                    </div>
-
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2>Back-end Engineer (Python)</h2>
-                            <strong>Amazon</strong>
-                        </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> Overland Park, Kansas
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-success">Full Time</span>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="job-single.html"></a>
-                    <div class="job-listing-logo">
-                        <img src="images/job_logo_4.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                    </div>
-
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2>Senior Art Director</h2>
-                            <strong>Microsoft</strong>
-                        </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> Anywhere
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-success">Full Time</span>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="job-single.html"></a>
-                    <div class="job-listing-logo">
-                        <img src="images/job_logo_5.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                    </div>
-
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2>Product Designer</h2>
-                            <strong>Puma</strong>
-                        </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> San Mateo, CA
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-success">Full Time</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="job-single.html"></a>
-                    <div class="job-listing-logo">
-                        <img src="images/job_logo_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                    </div>
-
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2>Product Designer</h2>
-                            <strong>Adidas</strong>
-                        </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> New York, New York
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-danger">Part Time</span>
-                        </div>
-                    </div>
-
-                </li>
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="job-single.html"></a>
-                    <div class="job-listing-logo">
-                        <img src="images/job_logo_2.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                    </div>
-
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2>Digital Marketing Director</h2>
-                            <strong>Sprint</strong>
-                        </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> Overland Park, Kansas
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-success">Full Time</span>
-                        </div>
-                    </div>
-                </li>
-
-
-
-
+                    </li>
+                @endforeach
             </ul>
 
             <div class="row pagination-wrap">
