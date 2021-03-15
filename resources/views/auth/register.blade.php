@@ -24,10 +24,10 @@
                     @csrf
 
                     <!-- Name -->
-                        <div class="row form-group ml-5">
+                        <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <label class="text-black w-50" for="name" :value="__('Name')">Nom</label>
-                                <input class=" w-75 form-control  @error('name') is-invalid @enderror" type="text"
+                                <label class="text-black" for="name" :value="__('Name')">Nom</label>
+                                <input class=" form-control  @error('name') is-invalid @enderror" type="text"
                                        name="name"
                                        :value="old('name')" required autofocus
                                        placeholder="Nom">
@@ -38,10 +38,10 @@
                         </div>
 
                         <!-- Email Address -->
-                        <div class="row form-group ml-5">
+                        <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <label class="text-black w-50" for="email" :value="__('Email')">Adresse Email</label>
-                                <input class=" w-75 form-control  @error('email') is-invalid @enderror" type="email"
+                                <label class="text-black" for="email" :value="__('Email')">Adresse Email</label>
+                                <input class=" form-control  @error('email') is-invalid @enderror" type="email"
                                        name="email"
                                        :value="old('email')" required autofocus
                                        placeholder="Email address">
@@ -52,11 +52,11 @@
                         </div>
 
                         <!-- numero phone -->
-                        <div class="row form-group ml-5">
+                        <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <label class="text-black w-50" for="phone" :value="__('Phone')">Numero d
+                                <label class="text-black" for="phone" :value="__('Phone')">Numero d
                                     telephone</label>
-                                <input class=" w-75 form-control  @error('phone') is-invalid @enderror" type="tel"
+                                <input class="form-control  @error('phone') is-invalid @enderror" type="tel"
                                        name="phone"
                                        :value="old('phone')" required autofocus
                                        placeholder="Numero de telephone">
@@ -67,11 +67,11 @@
                         </div>
 
                         <!-- Password -->
-                        <div class="row form-group mb-4 ml-5">
+                        <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <label class="text-black w-50" for="password" :value="__('Password')">Mot de
+                                <label class="text-black" for="password" :value="__('Password')">Mot de
                                     Passe</label>
-                                <input class="w-75 form-control @error('password') is-invalid @enderror" type="password"
+                                <input class=" form-control @error('password') is-invalid @enderror" type="password"
                                        name="password" required
                                        autocomplete="current-password"
                                        placeholder="Mot de passe">
@@ -83,20 +83,20 @@
 
                         <!-- Confirm Password -->
 
-                        <div class="row form-group mb-4 ml-5">
+                        <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <label class="text-black w-50" for="password_confirmation"
+                                <label class="text-black" for="password_confirmation"
                                        :value="__('Confirm Password')">Confirmer le mot de
                                     Passe</label>
-                                <input class="w-75 form-control" id="password_confirmation" type="password"
+                                <input class="form-control" id="password_confirmation" type="password"
                                        name="password_confirmation" placeholder="confirmer le mot de passe" required>
 
                             </div>
                         </div>
 
-                        <div class="row form-group mb-4 ml-5">
+                        <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <input type="submit" value="Creer mon compte" class="btn px-4 btn-primary text-white w-75 ">
+                                <input type="submit" value="Creer mon compte" class="btn px-4 btn-primary text-white w-100 ">
                             </div>
                         </div>
 

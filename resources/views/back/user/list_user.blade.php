@@ -29,7 +29,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{$user->phone}}</td>
                             <td>{{$user->email}}</td>
-                            <td>{{$user->created_at}}</td>
+                            <td>{{$user->created_at->format('d/m/Y à H:m')}}</td>
                             <td>
                                 <form id="{{$user->id}}" method="POST" action="{{ route('users.destroy',$user->id)  }}"
                                       style="display: none;">

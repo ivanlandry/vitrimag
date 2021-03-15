@@ -60,7 +60,7 @@
                                 <span class="icon-room"></span> {{ $annonce->ville }}
                             </div>
                             <div class="job-listing-meta">
-                                <span class="badge badge-danger">publié le {{ $annonce->created_at }}</span>
+                                <span class="badge badge-danger">postée le {{ $annonce->created_at->format('d/m/Y à H:m') }}</span>
                             </div>
                         </div>
                     </li>

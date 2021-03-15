@@ -148,9 +148,8 @@
                     }
                 })
                     .done((data) => {
-
+                        $('#sous_categories').empty();
                         data.forEach(item => $('#sous_categories').append(`<option value="${item.id}">${item.titre}</option>`));
-
                     })
                     .fail((error) => {
                         console.log(error);

@@ -36,7 +36,7 @@
                              <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>favoris</a>
                          </div>
                          <div class="col-6">
-                             <a href="#" class="btn btn-block btn-primary btn-md">Apply Now</a>
+                             <a href="#" class="btn btn-block btn-primary btn-md">Contacter par email</a>
                          </div>
                      </div>
                  </div>
@@ -82,7 +82,7 @@
                              <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
                          </div>
                          <div class="col-6">
-                             <a href="#" class="btn btn-block btn-primary btn-md">Apply Now</a>
+                             <a href="#" class="btn btn-block btn-primary btn-md">Contacter par email</a>
                          </div>
                      </div>
 
@@ -91,7 +91,7 @@
                      <div class="bg-light p-3 border rounded mb-4">
                          <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Details</h3>
                          <ul class="list-unstyled pl-3 mb-0">
-                             <li class="mb-2"><strong class="text-black">Publiée le:</strong> {{ $annonce->created_at }}</li>
+                             <li class="mb-2"><strong class="text-black">Postée le:</strong> {{ $annonce->created_at->format('d/m/Y à H:m') }}</li>
                              <li class="mb-2"><strong class="text-black">Catégorie:</strong> {{ $annonce->sous_category->titre }}</li>
                              <li class="mb-2"><strong class="text-black">Ville:</strong> {{ $annonce->ville }}</li>
                              <li class="mb-2"><strong class="text-black">Prix:</strong> {{$annonce->prix}} FCFA</li>
@@ -142,7 +142,7 @@
                                  <span class="icon-room"></span> {{ $annonce_similaire->ville }}
                              </div>
                              <div class="job-listing-meta">
-                                 <span class="badge badge-danger">publié le {{ $annonce_similaire->created_at }}</span>
+                                 <span class="badge badge-danger">postée le {{ $annonce_similaire->created_at->format('d/m/Y à H:m') }}</span>
                              </div>
                          </div>
                      </li>

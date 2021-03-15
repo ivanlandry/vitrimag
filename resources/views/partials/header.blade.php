@@ -16,41 +16,47 @@
                     </li>
 
                     <li><a href="contact.html">Contact</a></li>
-                    <a href="{{ route('add_annonce_get') }}"
-                       class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span
-                            class="mr-2 icon-add"></span>Poster une annonce</a>
+                    <li class="has-children">
+                        <a href="#"><span
+                                class="mr-2 icon-lock_outline"> Mon compte</span></a>
+                        <ul class="dropdown">
+                            @auth
+                                <a href="#"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <span class="mr-2"></span>deconnexion</a>
+                                <form action="{{ route('logout') }}" method="post" id="logout-form">
+                                    @csrf
+                                </form>
+                            @endauth
+                            @guest
+                                <li><a href="{{route('login')}}"
+                                       onclick="window.location.href=this.getAttribute('href');">Connexion</a></li>
+                                <li><a href="{{ route('register') }}"
+                                       onclick="window.location.href=this.getAttribute('href');">Creer un compte</a>
+                                </li>
+                            @endguest
+                        </ul>
+                    </li>
 
-                    <li class="d-lg-none"><a href="{{ route('add_annonce_get') }}"><span class="mr-2">+</span> Poster
+                    <li class="d-lg-none">
+                        <a href="{{ route('add_annonce_get') }}" onclick="window.location.href=this.getAttribute('href');"><span class="mr-2">+</span> Poster
                             une annonce</a>
                     </li>
-                    <li class="d-lg-none"><a href="{{ route('register') }}">S'inscrire</a></li>
-                    <li class="d-lg-none"><a href="{{ route('login') }}">Connexion</a></li>
+
                 </ul>
             </nav>
 
             <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
                 <div class="ml-auto">
-                    @auth
-                        <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <span class="mr-2"></span>deconnexion</a>
-                        <form action="{{ route('logout') }}" method="post" id="logout-form">
-                            @csrf
-                        </form>
-                    @endauth
-                    @guest
-                        <a href="{{ route('register') }}"
-                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                class="mr-2 icon-lock_outline"></span>S'inscrire</a>
-                        <a href="{{ route('login') }}"
-                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                class="mr-2 icon-lock_outline"></span>Connexion</a>
-                    @endguest
+                    <a href="{{ route('add_annonce_get') }}"
+                       class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"
+                       class="btn btn-outline-white border-width-2 "><span
+                            class="mr-2 icon-add"></span>Poster une annonce</a>
+
                 </div>
                 <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
             </div>
-
         </div>
     </div>
 </header>
