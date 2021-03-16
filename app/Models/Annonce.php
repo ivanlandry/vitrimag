@@ -12,7 +12,7 @@ class Annonce extends Model
     protected $guarded=[];
 
     public function sous_category(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(SousCategory::class);
     }
     public function user(){
         return $this->belongsTo(User::class);
