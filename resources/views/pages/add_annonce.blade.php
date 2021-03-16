@@ -157,7 +157,7 @@
             });
 
             @if(session()->get('message_add_annonce'))
-            toastr.success('{{ session()->get('message_add_annonce') }}');
+                toastr.success('{{ session()->get('message_add_annonce') }}');
             @endif
         });
 

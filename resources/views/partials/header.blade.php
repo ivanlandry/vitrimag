@@ -12,6 +12,7 @@
                         <ul class="dropdown">
                             <li><a href="#">Job Single</a></li>
                             <li><a href="#">Post a Job</a></li>
+                            <hr>
                         </ul>
                     </li>
 

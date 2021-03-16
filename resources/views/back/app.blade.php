@@ -95,21 +95,9 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('annonce.index') }}" class="nav-link">
                             <i class="far fa-hand-point-right"></i>
-                            <p>Toutes es annonces  <span class="badge bg-primary">3</span> </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-hand-point-right"></i>
-                            <p>Annonces désactivées  <span title="3 New Messages" class="badge bg-info">3</span></p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-hand-point-right"></i>
-                            <p>Annonces en attentes  <span  class="badge bg-danger">3</span></p>
+                            <p>Toutes les annonces</p>
                         </a>
                     </li>
 
@@ -128,7 +116,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('setting') }}" class="nav-link">
                             <i class="far fa-hand-point-right"></i>
                             <p>Paramètres du site</p>
                         </a>
