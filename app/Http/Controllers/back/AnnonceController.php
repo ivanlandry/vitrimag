@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\back;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ValidationAnnonce;
 use App\Models\Annonce;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 class AnnonceController extends Controller
 {
@@ -22,6 +25,10 @@ class AnnonceController extends Controller
         Annonce::find($id)->update([
             'publier' => true
         ]);
+
+        $annonce = Annonce::find($id);
+
+        Mail::to($annonce->user->email)->send(new ValidationAnnonce(Auth::user(), "Mr/Mme " . $annonce->user->name . "votre annonce a étée validée"));
 
         return redirect()->back()->with('message_valider', 'validation réussie');
     }

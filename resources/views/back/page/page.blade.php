@@ -13,7 +13,7 @@
                 <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="custom-tabs-one-a-propos-tab" data-toggle="pill"
-                           href="#custom-tabs-one-a-propos" role="tab" aria-controls="custom-tabs-one-home"
+                           href="#custom-tabs-one-a-propos" role="tab" aria-controls="custom-tabs-one-a-propos"
                            aria-selected="true">A propos de nous</a>
                     </li>
                     <li class="nav-item">
@@ -22,7 +22,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-one-contact-tab" data-toggle="pill"
-                           href="#custom-tabs-one-contact" role="tab" aria-controls="custom-tabs-one-messages"
+                           href="#custom-tabs-one-contact" role="tab" aria-controls="custom-tabs-one-contact"
                            aria-selected="false">Contactez nous</a>
                     </li>
 

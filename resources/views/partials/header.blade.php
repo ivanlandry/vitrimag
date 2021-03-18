@@ -22,9 +22,10 @@
                                 class="mr-2 icon-lock_outline"> Mon compte</span></a>
                         <ul class="dropdown">
                             @auth
-                                <a href="#"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <span class="mr-2"></span>deconnexion</a>
+                                <li><a href="#"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <span class="mr-2"></span>deconnexion</a>
+                                </li>
                                 <form action="{{ route('logout') }}" method="post" id="logout-form">
                                     @csrf
                                 </form>
@@ -40,7 +41,8 @@
                     </li>
 
                     <li class="d-lg-none">
-                        <a href="{{ route('add_annonce_get') }}" onclick="window.location.href=this.getAttribute('href');"><span class="mr-2">+</span> Poster
+                        <a href="{{ route('add_annonce_get') }}"
+                           onclick="window.location.href=this.getAttribute('href');"><span class="mr-2">+</span> Poster
                             une annonce</a>
                     </li>
 

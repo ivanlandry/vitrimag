@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\SousCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class AnnonceController extends Controller
 {
@@ -143,6 +144,15 @@ class AnnonceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (File::exists(public_path('storage/' . Annonce::find($id)->img_1)) and File::exists(public_path('storage/' . Annonce::find($id)->img_2)) and File::exists(public_path('storage/'.Annonce::find($id)->img_3)) ) {
+
+            File::delete(public_path('storage/' . Annonce::find($id)->img_1));
+            File::delete(public_path('storage/' . Annonce::find($id)->img_2));
+            File::delete(public_path('storage/' . Annonce::find($id)->img_3));
+
+            Annonce::destroy($id);
+        }
+
+        return redirect()->back();
     }
 }

@@ -18,14 +18,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('annonce/ajouter', [\App\Http\Controllers\AnnonceController::class, 'create'])->name('add_annonce_get');
 Route::post('annonce/store', [\App\Http\Controllers\AnnonceController::class, 'store'])->name('add_annonce_post');
 Route::get('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'show'])->name('show_annonce');
+Route::delete('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'destroy'])->name('delete_annonce');
 Route::get('annonce/', [\App\Http\Controllers\AnnonceController::class, 'index'])->name('all_annonce');
 
 Route::post('getSousCategorie/', [\App\Http\Controllers\AnnonceController::class, 'getSousCategorie'])->name('getSousCategorie');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
+Route::get('/dashboard', [\App\Http\Controllers\monCompte\MonCompteController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
@@ -40,5 +38,6 @@ Route::prefix('admin')->group(function () {
     Route::delete('annonces/{id}', [\App\Http\Controllers\back\AnnonceController::class, 'destroy'])->name('annonce.destroy');
     Route::resource('users', \App\Http\Controllers\back\UserController::class);
 });
+
 
 require __DIR__ . '/auth.php';

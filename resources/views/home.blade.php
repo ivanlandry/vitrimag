@@ -48,7 +48,7 @@
                         <div class="job-listing-logo">
                             <img src="{{ asset('storage/'.$annonce->img_1) }}"
                                  alt="Free Website Template by Free-Template.co"
-                                 class="img-fluid" style="width: 100px; height: 100px;">
+                                 class="img-fluid" style="width: 320px; height: 170px;">
                         </div>
 
                         <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
