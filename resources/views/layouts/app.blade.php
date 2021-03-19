@@ -18,11 +18,25 @@
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/quill.snow.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <style>
+        .loading {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.8) url("{{ asset('images/spinner.gif') }}") center no-repeat;
+        }
+
+    </style>
 </head>
 <body id="top">
 
@@ -74,7 +88,19 @@
 <script src="{{asset('js/custom.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+<script !src="">
+    $(document).on({
+        ajaxStart: function () {
+            $(".loading").css('display', 'block');
+        },
+        ajaxStop: function () {
+            $(".loading").css('display', 'none');
+
+        }
+    });
+</script>
 @yield('extra-script')
 
+<div class="loading"></div>
 </body>
 </html>

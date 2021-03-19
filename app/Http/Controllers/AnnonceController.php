@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddAnnonceRequest;
 use App\Models\Annonce;
 use App\Models\Category;
+use App\Models\Favoris;
 use App\Models\SousCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,11 +108,15 @@ class AnnonceController extends Controller
     {
         $annonce = Annonce::find($id);
 
+        $favorisCount=0;
+
+       if (Auth::user()){
+           $favorisCount = count(Favoris::where('annonce_id',Annonce::find($id)->id)->where('user_id',Auth::user()->id)->get());
+       }
+
         $annonces_similaires = SousCategory::find($annonce->sous_category->id);
 
-      //  dd($annonce_similaires->annonces);
-
-        return view('pages/show_annonce' ,['annonce'=>$annonce,'annonces_similaires'=>$annonces_similaires->annonces]);
+        return view('pages/show_annonce' ,['annonce'=>$annonce,'annonces_similaires'=>$annonces_similaires->annonces,'favorisCount'=>$favorisCount]);
     }
 
     /**
@@ -133,7 +138,7 @@ class AnnonceController extends Controller
      * @return \Illuminate\Http\Response     */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

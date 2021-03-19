@@ -47,10 +47,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        if (session()->get('data')){
-            dd(session()->get('data'));
-        }
-
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

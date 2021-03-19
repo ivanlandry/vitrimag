@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password'
     ];
 
-    protected $guarded=[];
+    protected $guarded = [];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -43,11 +43,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function annonces(){
+    public function annonces()
+    {
         return $this->hasMany(Annonce::class);
     }
 
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany(Role::class);
     }
+
+    public function favoris()
+    {
+        return $this->hasMany(Favoris::class);
+    }
+
 }

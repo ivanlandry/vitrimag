@@ -98,16 +98,19 @@
 
                         <div class="form-group">
                             <label for="company-website-tw d-block">Choisir des photos</label> <br>
-                            <input class=" form-control-file @error('img_1') is-invalid @enderror" type="file" name="img_1"
+                            <input class=" form-control-file @error('img_1') is-invalid @enderror" type="file"
+                                   name="img_1"
                                    required>
                             @error('img1')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror<br>
-                            <input class=" form-control-file @error('img_2') is-invalid @enderror" type="file" name="img_2">
+                            <input class=" form-control-file @error('img_2') is-invalid @enderror" type="file"
+                                   name="img_2">
                             @error('img2')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror<br>
-                            <input class=" form-control-file @error('img_3') is-invalid @enderror" type="file" name="img_3">
+                            <input class=" form-control-file @error('img_3') is-invalid @enderror" type="file"
+                                   name="img_3">
                             @error('img3')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -135,6 +138,7 @@
 @section('extra-script')
     <script !src="">
 
+
         $(function () {
 
             $('#categorie').change(function () {
@@ -157,7 +161,7 @@
             });
 
             @if(session()->get('message_add_annonce'))
-                toastr.success('{{ session()->get('message_add_annonce') }}');
+            toastr.success('{{ session()->get('message_add_annonce') }}');
             @endif
         });
 

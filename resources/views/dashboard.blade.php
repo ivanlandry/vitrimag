@@ -97,8 +97,95 @@
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-one-parametre" role="tabpanel"
                                      aria-labelledby="custom-tabs-one-parametre-tab">
-                                    Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus
-                                    volutpat augue
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="card card-danger">
+                                                <div class="card-header">
+                                                    <div>
+                                                        <h6 class="card-title float-left">Informations</h6>
+                                                        <a id="update_info" href="" class="float-right"
+                                                           style="text-decoration: none">modifier</a>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form action="{{ route('update_user',Auth::user()->id) }}"
+                                                          method="post" id="form-update-info">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="form-group">
+                                                            <label>Votre nom</label>
+                                                            <div class="input-group">
+                                                                <input required type="text" class="form-control update-info"
+                                                                       disabled
+                                                                       value="{{Auth::user()->name}}" name="name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Numero de téléphone</label>
+                                                            <div class="input-group">
+                                                                <input required type="text" class="form-control update-info"
+                                                                       disabled
+                                                                       value="{{Auth::user()->phone}}" name="phone">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Adresse email</label>
+
+                                                            <div class="input-group">
+                                                                <input required type="email" class="form-control update-info"
+                                                                       disabled
+                                                                       value="{{Auth::user()->email}}" name="email">
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-primary" type="submit"
+                                                                style="display: none;">modifier
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <!-- /.card-body -->
+                                            </div>
+                                            <!-- /.card -->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card card-danger">
+                                                <div class="card-header">
+                                                    <div>
+                                                        <h6 class="card-title float-left">Mot de passe</h6>
+                                                        <a id="update_password" href="" class="float-right"
+                                                           style="text-decoration:none;">modifier</a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <form action="{{ route('update_user',Auth::user()->id) }}" method="post" id="form-update-password">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="form-group">
+                                                                <label>Ancien mot de passe</label>
+
+                                                                <input type="password" class="form-control" required
+                                                                        name="ancien_password" >
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>Nouveau mot de passe</label>
+                                                                <input type="password" class="form-control"
+                                                                       name="nouveau_password" required>
+                                                            </div>
+
+                                                            <button class="btn btn-primary">modifier</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
 
                                 </div>
 
@@ -117,9 +204,18 @@
 
 
         $(function () {
+
+
             @if(session()->get('message_auth'))
             toastr.success('{{ session()->get('message_auth') }}');
             @endif
+
+            @if(session()->get('update_compte'))
+            toastr.success('{{ session()->get('update_compte') }}');
+            @endif
+
+
+            /* --------      script annonce ---------------------- */
 
             $('#tout_annonce').on('click', function () {
 
@@ -217,6 +313,18 @@
                     "                                            </li>");
                 @endif
                 @endforeach
+
+            });
+
+            /* --------      script parametres ---------------------- */
+
+            $('#update_info').on('click', function (e) {
+
+                e.preventDefault();
+
+                $('.update-info').attr('disabled', false);
+
+                $('#form-update-info').children('button').show();
 
             });
 

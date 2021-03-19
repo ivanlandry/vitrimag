@@ -19,11 +19,15 @@ Route::get('annonce/ajouter', [\App\Http\Controllers\AnnonceController::class, '
 Route::post('annonce/store', [\App\Http\Controllers\AnnonceController::class, 'store'])->name('add_annonce_post');
 Route::get('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'show'])->name('show_annonce');
 Route::delete('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'destroy'])->name('delete_annonce');
+Route::put('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'update'])->name('update_annonce');
 Route::get('annonce/', [\App\Http\Controllers\AnnonceController::class, 'index'])->name('all_annonce');
 
 Route::post('getSousCategorie/', [\App\Http\Controllers\AnnonceController::class, 'getSousCategorie'])->name('getSousCategorie');
 
+
 Route::get('/dashboard', [\App\Http\Controllers\monCompte\MonCompteController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::put('user/update/{id}',[\App\Http\Controllers\monCompte\MonCompteController::class,'updateUser'])->middleware(['auth'])->name('update_user');
+Route::post('add_favoris/',[\App\Http\Controllers\monCompte\MonCompteController::class,'addFavoris'])->middleware(['auth'])->name('add_favoris');
 
 Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
