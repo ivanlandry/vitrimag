@@ -82,15 +82,22 @@
                     </div>
 
                     <div class="row mb-5">
-                        <div class="col-6">
+                        <div class="col-4">
 
                             <button id="add_favoris" class="btn btn-block btn-light btn-md">
                                 <i class="@if($favorisCount==1) fas fa-heart @else far fa-heart @endif text-danger"></i>
                                 favoris
                             </button>
                         </div>
-                        <div class="col-6">
-                            <a href="#" class="btn btn-block btn-primary btn-md">Contacter par email</a>
+                        <div class="col-4">
+                            <a href="#"
+                               onclick="event.preventDefault(); sendMessageWhastapp('+237{{ $annonce->user->phone }}','s\'il vous plait envoyez moi plus d\'informations à ce sujet.');"
+                               class="btn btn-block btn-primary btn-md"><i class="fab fa-whatsapp pr-2" aria-hidden="true"></i>Whatsapp</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="#"
+                               onclick="event.preventDefault();"
+                               class="btn btn-block btn-primary btn-md">Contacter par email</a>
                         </div>
                     </div>
 
@@ -186,7 +193,15 @@
 
 @section('extra-script')
     <script !src="">
+
+        function sendMessageWhastapp(number, message) {
+
+            message = message.split(' ').join('%20')
+            window.open("https://api.whatsapp.com/send?phone=" + number + "&text=%20" + window.location.href + ".\n" + message, "_blank");
+        }
+
         $(function () {
+
             $('#add_favoris').on('click', function () {
 
                 @if(Auth::user())

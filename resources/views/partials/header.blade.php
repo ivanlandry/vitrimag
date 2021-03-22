@@ -22,6 +22,8 @@
                                 class="mr-2 icon-lock_outline"> Mon compte</span></a>
                         <ul class="dropdown">
                             @auth
+                                <li><a href="{{route('dashboard')}}"
+                                       onclick="window.location.href=this.getAttribute('href');">tableau de bord</a></li>
                                 <li><a href="#"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <span class="mr-2"></span>deconnexion</a>
