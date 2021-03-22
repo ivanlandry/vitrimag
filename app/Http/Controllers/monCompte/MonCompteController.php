@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Auth;
 class MonCompteController extends Controller
 {
 
-
     public function index()
     {
 
         $annonce = Auth::user()->annonces;
 
-        return view('dashboard', ['annonces' => $annonce]);
+        $favoris = Favoris::where('user_id',Auth::user()->id)->get();
+
+        return view('dashboard', ['annonces' => $annonce,'favoris'=>$favoris]);
     }
 
     public function updateUser(Request $request, $id)
@@ -61,6 +62,12 @@ class MonCompteController extends Controller
             }
         }
         abort(404);
+    }
+
+    public function deleteFavoris($id){
+
+        Favoris::destroy($id);
+       return redirect()->back()->with('delete_favoris','favoris supprimée.');
     }
 
 }

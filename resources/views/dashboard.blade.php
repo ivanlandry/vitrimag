@@ -28,7 +28,7 @@
                                     <a class="nav-link" id="custom-tabs-one-favoris-tab" data-toggle="pill"
                                        href="#custom-tabs-one-favoris"
                                        role="tab" aria-controls="custom-tabs-one-favoris" aria-selected="false">Mes
-                                        favoris</a>
+                                        favoris ({{count($favoris)}})</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="custom-tabs-one-parametre-tab" data-toggle="pill"
@@ -44,55 +44,99 @@
                                 <div class="tab-pane fade show active" id="custom-tabs-one-a-annonce" role="tabpanel"
                                      aria-labelledby="custom-tabs-one-a-annonce-tab">
 
-                                    <ul class="job-listings mb-5" id="list_annonce">
-                                        <h6>Filtrer par :
-                                            <a href="" style="text-decoration: none; color: black;" id="tout_annonce">tout</a>
-                                            <a href="" style="text-decoration: none;" id="annonce_attente"> | en
-                                                attente</a>
-                                            <a href="" style="text-decoration: none;" id="annonce_publie"> | publié</a>
-                                        </h6>
-                                        @foreach($annonces as $annonce)
-                                            <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                                                <div class="job-listing-logo">
-                                                    <img src="{{ asset('storage/'.$annonce->img_1) }}"
-                                                         alt="Free Website Template by Free-Template.co"
-                                                         class="img-fluid" style="width: 320px; height: 170px;">
-                                                </div>
+                                    @if(count($annonces)==0)
+                                        <span>Vous n'avez actuellemnt aucune annonce.</span>
+                                    @else
+                                        <ul class="job-listings mb-5" id="list_annonce">
+                                            <h6>Filtrer par :
+                                                <a href="" style="text-decoration: none; color: black;"
+                                                   id="tout_annonce">tout</a>
+                                                <a href="" style="text-decoration: none;" id="annonce_attente"> | en
+                                                    attente</a>
+                                                <a href="" style="text-decoration: none;" id="annonce_publie"> |
+                                                    publié</a>
+                                            </h6>
+                                            @foreach($annonces as $annonce)
+                                                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                                                    <div class="job-listing-logo">
+                                                        <img src="{{ asset('storage/'.$annonce->img_1) }}"
+                                                             alt="Free Website Template by Free-Template.co"
+                                                             class="img-fluid" style="width: 320px; height: 170px;">
+                                                    </div>
 
-                                                <div
-                                                    class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                                                    <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                                                        <h2>{{$annonce->titre}}</h2>
-                                                        <strong>{{ $annonce->sous_category->titre }}
-                                                            , {{ $annonce->ville }}</strong><br>
-                                                        <span> {{ $annonce->created_at->format('d/m/Y à H:m') }}</span>
+                                                    <div
+                                                        class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                                        <div
+                                                            class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                                            <h2>{{$annonce->titre}}</h2>
+                                                            <strong>{{ $annonce->sous_category->titre }}
+                                                                , {{ $annonce->ville }}</strong><br>
+                                                            <span> {{ $annonce->created_at->format('d/m/Y à H:m') }}</span>
+                                                        </div>
+                                                        <div
+                                                            class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                                            <strong>  {{ $annonce->prix }} FCFA </strong><br><br>
+                                                            <span> 0 vus </span>
+                                                        </div>
+                                                        <div class="job-listing-meta">
+                                                            <form action="{{ route('delete_annonce',$annonce->id) }}"
+                                                                  method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                        class="btn btn-outline-danger">supprimer
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                    <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                                                        <strong>  {{ $annonce->prix }} FCFA </strong><br><br>
-                                                        <span> 0 vus </span>
-                                                    </div>
-                                                    <div class="job-listing-meta">
-                                                        <form action="{{ route('delete_annonce',$annonce->id) }}"
-                                                              method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                    class="btn btn-outline-danger">supprimer
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-one-favoris" role="tabpanel"
                                      aria-labelledby="custom-tabs-one-favoris-tab">
-                                    Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra
-                                    purus ut
-                                    ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing
+                                    <ul class="job-listings mb-5">
+
+                                        @if(count($favoris)==0)
+                                            <span> Vous n'avez actuellement aucun favoris.</span>
+                                        @else
+                                            @foreach($favoris as $favori)
+                                                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                                                    <div class="job-listing-logo">
+                                                        <img src="{{ asset('storage/'.$favori->annonce->img_1) }}"
+                                                             alt="Free Website Template by Free-Template.co"
+                                                             class="img-fluid" style="width: 320px; height: 170px;">
+                                                    </div>
+
+                                                    <div
+                                                        class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                                        <div
+                                                            class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                                            <h2>{{$favori->annonce->titre}}</h2>
+                                                            <strong>{{ $favori->annonce->sous_category->titre }}
+                                                                , {{ $favori->annonce->ville }}</strong><br>
+                                                            <span> {{ $favori->created_at->format('d/m/Y à H:m') }}</span>
+                                                        </div>
+                                                        <div
+                                                            class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                                            <strong>  {{ $favori->annonce->prix }}
+                                                                FCFA </strong><br><br>
+
+                                                        </div>
+                                                        <div class="job-listing-meta">
+                                                            <form action="{{ route('delete_favoris',$favori->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class=" btn btn-outline-danger" type="submit">supprimer
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                    </ul>
 
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-one-parametre" role="tabpanel"
@@ -117,7 +161,8 @@
                                                         <div class="form-group">
                                                             <label>Votre nom</label>
                                                             <div class="input-group">
-                                                                <input required type="text" class="form-control update-info"
+                                                                <input required type="text"
+                                                                       class="form-control update-info"
                                                                        disabled
                                                                        value="{{Auth::user()->name}}" name="name">
                                                             </div>
@@ -126,7 +171,8 @@
                                                         <div class="form-group">
                                                             <label>Numero de téléphone</label>
                                                             <div class="input-group">
-                                                                <input required type="text" class="form-control update-info"
+                                                                <input required type="text"
+                                                                       class="form-control update-info"
                                                                        disabled
                                                                        value="{{Auth::user()->phone}}" name="phone">
                                                             </div>
@@ -136,7 +182,8 @@
                                                             <label>Adresse email</label>
 
                                                             <div class="input-group">
-                                                                <input required type="email" class="form-control update-info"
+                                                                <input required type="email"
+                                                                       class="form-control update-info"
                                                                        disabled
                                                                        value="{{Auth::user()->email}}" name="email">
                                                             </div>
@@ -162,14 +209,15 @@
 
                                                 <div class="card-body">
                                                     <div class="form-group">
-                                                        <form action="{{ route('update_user',Auth::user()->id) }}" method="post" id="form-update-password">
+                                                        <form action="{{ route('update_user',Auth::user()->id) }}"
+                                                              method="post" id="form-update-password">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="form-group">
                                                                 <label>Ancien mot de passe</label>
 
                                                                 <input type="password" class="form-control" required
-                                                                        name="ancien_password" >
+                                                                       name="ancien_password">
                                                             </div>
 
                                                             <div class="form-group">
@@ -202,9 +250,11 @@
 @section('extra-script')
     <script !src="">
 
-
         $(function () {
 
+            @if(session()->get('delete_favoris'))
+            toastr.success('{{ session()->get('delete_favoris') }}');
+            @endif
 
             @if(session()->get('message_auth'))
             toastr.success('{{ session()->get('message_auth') }}');
@@ -327,6 +377,7 @@
                 $('#form-update-info').children('button').show();
 
             });
+
 
         });
 

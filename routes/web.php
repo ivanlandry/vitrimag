@@ -28,6 +28,7 @@ Route::post('getSousCategorie/', [\App\Http\Controllers\AnnonceController::class
 Route::get('/dashboard', [\App\Http\Controllers\monCompte\MonCompteController::class, 'index'])->middleware(['auth'])->name('dashboard');
 Route::put('user/update/{id}',[\App\Http\Controllers\monCompte\MonCompteController::class,'updateUser'])->middleware(['auth'])->name('update_user');
 Route::post('add_favoris/',[\App\Http\Controllers\monCompte\MonCompteController::class,'addFavoris'])->middleware(['auth'])->name('add_favoris');
+Route::delete('delete_favoris/{id}',[\App\Http\Controllers\monCompte\MonCompteController::class,'deleteFavoris'])->name('delete_favoris');
 
 Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
