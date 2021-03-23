@@ -9,6 +9,7 @@ use App\Models\Favoris;
 use App\Models\SousCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class AnnonceController extends Controller
@@ -107,6 +108,10 @@ class AnnonceController extends Controller
     public function show($id)
     {
         $annonce = Annonce::find($id);
+
+        $annonce->update([
+            'nb_vue'=>DB::raw('nb_vue+1')
+        ]);
 
         $favorisCount=0;
 

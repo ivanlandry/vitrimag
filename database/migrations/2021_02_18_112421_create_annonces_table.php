@@ -28,6 +28,7 @@ class CreateAnnoncesTable extends Migration
             $table->string('img_1');
             $table->string('img_2');
             $table->string('img_3');
+            $table->integer('nb_vue')->default(0);
             $table->boolean('publier')->default(false);
             $table->boolean('actif')->default(true);
             $table->timestamps();

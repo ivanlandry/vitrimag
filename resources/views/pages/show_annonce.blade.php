@@ -211,7 +211,6 @@
                     data: {
                         '_token': '{{ csrf_token() }}',
                         'annonce': '{{ $annonce->id }}',
-                        'user': '{{ Auth::user()->id }}'
                     }
                 }).done(function (data) {
                     console.log(data);

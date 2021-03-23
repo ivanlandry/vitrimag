@@ -57,7 +57,7 @@
                                                     publié</a>
                                             </h6>
                                             @foreach($annonces as $annonce)
-                                                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                                                <li class="item_annonce job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                                                     <div class="job-listing-logo">
                                                         <img src="{{ asset('storage/'.$annonce->img_1) }}"
                                                              alt="Free Website Template by Free-Template.co"
@@ -76,7 +76,7 @@
                                                         <div
                                                             class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
                                                             <strong>  {{ $annonce->prix }} FCFA </strong><br><br>
-                                                            <span> 0 vus </span>
+                                                            <span> {{ $annonce->nb_vue }} vus </span>
                                                         </div>
                                                         <div class="job-listing-meta">
                                                             <form action="{{ route('delete_annonce',$annonce->id) }}"
@@ -279,10 +279,10 @@
                 $('#annonce_publie').css('color', 'black');
                 $('#annonce_attente, #tout_annonce').css('color', '#89BA16');
 
-                $('.job-listing').remove();
+                $('.item_annonce').remove();
 
                 @foreach($annonces as $annonce)
-                @if($annonce->publie==true)
+                @if($annonce->publier==true)
                 $('#list_annonce').append("<li class=\"job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center\">\n" +
                     "                                                <div class=\"job-listing-logo\">\n" +
                     "                                                    <img src=\"{{ asset('storage/'.$annonce->img_1) }}\"\n" +
@@ -300,7 +300,7 @@
                     "                                                    </div>\n" +
                     "                                                    <div class=\"job-listing-location mb-3 mb-sm-0 custom-width w-25\">\n" +
                     "                                                        <strong>  {{ $annonce->prix }} FCFA </strong><br><br>\n" +
-                    "                                                        <span> 0 vus </span>\n" +
+                    "                                                        <span> {{ $annonce->nb_vue }} vus </span>\n" +
                     "                                                    </div>\n" +
                     "                                                    <div class=\"job-listing-meta\">\n" +
                     "                                                        <form action=\"{{ route('delete_annonce',$annonce->id) }}\"\n" +
@@ -326,10 +326,10 @@
                 $('#annonce_attente').css('color', 'black');
                 $('#annonce_publie, #tout_annonce').css('color', '#89BA16');
 
-                $('.job-listing').remove();
+                $('.item_annonce').remove();
 
                 @foreach($annonces as $annonce)
-                @if($annonce->publie==false)
+                @if($annonce->publier==false)
                 $('#list_annonce').append("<li class=\"job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center\">\n" +
                     "                                                <div class=\"job-listing-logo\">\n" +
                     "                                                    <img src=\"{{ asset('storage/'.$annonce->img_1) }}\"\n" +
@@ -347,7 +347,7 @@
                     "                                                    </div>\n" +
                     "                                                    <div class=\"job-listing-location mb-3 mb-sm-0 custom-width w-25\">\n" +
                     "                                                        <strong>  {{ $annonce->prix }} FCFA </strong><br><br>\n" +
-                    "                                                        <span> 0 vus </span>\n" +
+                    "                                                        <span> {{ $annonce->nb_vue }} vus </span>\n" +
                     "                                                    </div>\n" +
                     "                                                    <div class=\"job-listing-meta\">\n" +
                     "                                                        <form action=\"{{ route('delete_annonce',$annonce->id) }}\"\n" +
@@ -377,7 +377,6 @@
                 $('#form-update-info').children('button').show();
 
             });
-
 
         });
 

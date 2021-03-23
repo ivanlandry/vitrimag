@@ -47,14 +47,14 @@ class MonCompteController extends Controller
     {
         if ($request->ajax()) {
 
-            $favoris = Favoris::where('user_id', (int)$request->post('user'))->where('annonce_id', (int)$request->post('annonce'))->get();
+            $favoris = Favoris::where('user_id', Auth::user()->id)->where('annonce_id', (int)$request->post('annonce'))->get();
 
             if (count($favoris) == 1) {
                 Favoris::destroy($favoris[0]->id);
                 return response()->json("deja en favoris");
             } else {
                 $favoris = new Favoris();
-                $favoris->user()->associate($request->post('user'));
+                $favoris->user()->associate(Auth::user()->id);
                 $favoris->annonce()->associate($request->post('annonce'));
                 $favoris->save();
 
