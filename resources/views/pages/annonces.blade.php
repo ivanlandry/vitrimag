@@ -1,43 +1,31 @@
 @extends('layouts.app')
 
+@section('title')
+    @parent
+    | toutes les annonces
+@endsection
 @section('banner_page')
 
-    @include('partials.search_bar')
+    @include('partials.titre_page',['name_page'=>'Toutes les annonces'])
 
 @endsection
 
+
 @section('content')
 
-
     <section class="site-section">
-
         <div class="container">
-
             <div class="row mb-5 justify-content-center">
-                <div class="col-md-7 text-center">
-                    <h2 class="section-title mb-2">Decouvrez nos catégories</h2>
+                <div class="col-md-7">
+                    <h2 class="section-title mb-2">Toutes les annonces</h2>
                 </div>
-            </div>
-
-            <div class="row">
-                @foreach($categories as $categorie)
-                    <div class=" col-md-3" >
-                        <img src="{{ asset('storage/'.$categorie->image) }}" class="card-img-top" alt="" width="10" height="180">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#" class="text-dark" style="text-decoration: none;"><strong>{{ $categorie->titre }}</strong></a></h5>
-                            @foreach( $categorie->sous_categories as $sous_categorie)
-                                <p class="card-text"><a href="" class="text-dark" style="text-decoration: none;">{{ $sous_categorie->titre}}</a></p>
-                            @endforeach
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row mb-5 justify-content-center">
-                <div class="col-md-7 text-center">
-                    <h2 class="section-title mb-2">Annonces récentes</h2>
+                <div class="col-md-5">
+                    <h6>Filtrer par :
+                        <a href="" style="text-decoration: none; color: black;"
+                           id="tout_annonce">Date</a>
+                        <a href="" style="text-decoration: none;" id="annonce_attente">
+                          | Prix</a>
+                    </h6>
                 </div>
             </div>
 
@@ -60,7 +48,8 @@
                                 <span class="icon-room"></span> {{ $annonce->ville }}
                             </div>
                             <div class="job-listing-meta">
-                                <span class="badge badge-danger">postée {{$annonce->created_at->diffForHumans() }}</span>
+                                <span
+                                    class="badge badge-danger">postée {{ $annonce->created_at->diffForHumans() }}</span>
                             </div>
                         </div>
                     </li>
@@ -72,4 +61,3 @@
     </section>
 
 @endsection
-

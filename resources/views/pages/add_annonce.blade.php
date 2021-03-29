@@ -62,7 +62,6 @@
                             <select class="form-control border rounded" id="sous_categories"
                                     data-width="100%" data-live-search="true" title="choisir une sous categorie"
                                     name="sous_category_id" required>
-
                             </select>
                         </div>
 

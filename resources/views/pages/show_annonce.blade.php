@@ -92,12 +92,13 @@
                         <div class="col-4">
                             <a href="#"
                                onclick="event.preventDefault(); sendMessageWhastapp('+237{{ $annonce->user->phone }}','s\'il vous plait envoyez moi plus d\'informations à ce sujet.');"
-                               class="btn btn-block btn-primary btn-md"><i class="fab fa-whatsapp pr-2" aria-hidden="true"></i>Whatsapp</a>
+                               class="btn btn-block btn-primary btn-md"><i class="fab fa-whatsapp pr-2"
+                                                                           aria-hidden="true"></i>Whatsapp</a>
                         </div>
                         <div class="col-4">
                             <a href="#"
                                onclick="event.preventDefault();"
-                               class="btn btn-block btn-primary btn-md">Contacter par email</a>
+                               class="btn btn-block btn-primary btn-md"> Email</a>
                         </div>
                     </div>
 
@@ -106,8 +107,7 @@
                     <div class="bg-light p-3 border rounded mb-4">
                         <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Details</h3>
                         <ul class="list-unstyled pl-3 mb-0">
-                            <li class="mb-2"><strong class="text-black">Postée
-                                    le:</strong> {{ $annonce->created_at->format('d/m/Y à H:m') }}</li>
+                            <li class="mb-2"><strong class="text-black">Postée :</strong> {{ $annonce->created_at->diffForHumans() }}</li>
                             <li class="mb-2"><strong
                                     class="text-black">Catégorie:</strong> {{ $annonce->sous_category->titre }}</li>
                             <li class="mb-2"><strong class="text-black">Ville:</strong> {{ $annonce->ville }}</li>
@@ -119,7 +119,7 @@
                     <div class="bg-light p-3 border rounded">
                         <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Partager</h3>
                         <div class="px-3">
-                            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
+                            <a href="" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
                             <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
                             <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
                             <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>
@@ -142,49 +142,33 @@
 
             <ul class="job-listings mb-5">
                 @foreach($annonces_similaires as $annonce_similaire)
-                    <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                        <a href="{{ route('show_annonce',$annonce_similaire) }}"></a>
-                        <div class="job-listing-logo">
-                            <img src="{{ asset('storage/'.$annonce_similaire->img_1) }}"
-                                 alt="Free Website Template by Free-Template.co"
-                                 class="img-fluid" style="width: 100px; height: 100px;">
-                        </div>
+                    @if($annonce_similaire->id!=$annonce->id)
+                        <li class="item_annonce job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                            <a href="{{ route('show_annonce',$annonce_similaire) }}"></a>
+                            <div class="job-listing-logo">
+                                <img src="{{ asset('storage/'.$annonce_similaire->img_1) }}"
+                                     alt="Free Website Template by Free-Template.co"
+                                     class="img-fluid" style="width: 100px; height: 100px;">
+                            </div>
 
-                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                                <h2>{{$annonce_similaire->titre}}</h2>
-                                <strong>{{ $annonce_similaire->sous_category->titre }}</strong>
-                            </div>
-                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                                <span class="icon-room"></span> {{ $annonce_similaire->ville }}
-                            </div>
-                            <div class="job-listing-meta">
+                            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                    <h2>{{$annonce_similaire->titre}}</h2>
+                                    <strong>{{ $annonce_similaire->sous_category->titre }}</strong>
+                                </div>
+                                <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                    <span class="icon-room"></span> {{ $annonce_similaire->ville }}
+                                </div>
+                                <div class="job-listing-meta">
                                 <span
                                     class="badge badge-danger">postée le {{ $annonce_similaire->created_at->format('d/m/Y à H:m') }}</span>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endif
                 @endforeach
 
             </ul>
-
-            <div class="row pagination-wrap">
-                <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-                    <span>Showing 1-7 Of 22,392 Jobs</span>
-                </div>
-                <div class="col-md-6 text-center text-md-right">
-                    <div class="custom-pagination ml-auto">
-                        <a href="#" class="prev">Prev</a>
-                        <div class="d-inline-block">
-                            <a href="#" class="active">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                        </div>
-                        <a href="#" class="next">Next</a>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </section>

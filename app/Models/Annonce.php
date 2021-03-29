@@ -9,15 +9,26 @@ class Annonce extends Model
 {
     use HasFactory;
 
-    protected $guarded=[];
+    protected $guarded = [];
 
-    public function sous_category(){
+    public function scopePublier($query)
+    {
+        return $query->where('publier', true);
+    }
+
+
+    public function sous_category()
+    {
         return $this->belongsTo(SousCategory::class);
     }
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function favoris(){
+
+    public function favoris()
+    {
         return $this->hasMany(Favoris::class);
     }
 }

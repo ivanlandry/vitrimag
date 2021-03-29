@@ -5,7 +5,8 @@
 
             <nav class="mx-auto site-navigation">
                 <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-                    <li><a href="index.html" class="nav-link active">Anonces</a></li>
+                    <li><a href="{{ route('all_annonce') }}" onclick="window.location.href=this.getAttribute('href');"
+                           class="nav-link active">Anonces</a></li>
 
                     <li class="has-children">
                         <a href="#">Catégories</a>
@@ -23,7 +24,8 @@
                         <ul class="dropdown">
                             @auth
                                 <li><a href="{{route('dashboard')}}"
-                                       onclick="window.location.href=this.getAttribute('href');">tableau de bord</a></li>
+                                       onclick="window.location.href=this.getAttribute('href');">tableau de bord</a>
+                                </li>
                                 <li><a href="#"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <span class="mr-2"></span>deconnexion</a>

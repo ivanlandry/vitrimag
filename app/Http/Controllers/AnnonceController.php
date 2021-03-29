@@ -27,7 +27,9 @@ class AnnonceController extends Controller
 
     public function index()
     {
-        //
+        $annonces = Annonce::publier()->get();
+
+        return view('pages.annonces',['annonces'=>$annonces]);
     }
 
     /**
@@ -42,7 +44,7 @@ class AnnonceController extends Controller
 
         $categories = Category::all();
 
-        return view('pages/add_annonce', ['villes' => $villes, 'categories' => $categories]);
+        return view('pages.add_annonce', ['villes' => $villes, 'categories' => $categories]);
 
 
     }
@@ -107,7 +109,7 @@ class AnnonceController extends Controller
      */
     public function show($id)
     {
-        $annonce = Annonce::find($id);
+        $annonce = Annonce::publier()->where('id',$id)->firstOrFail();
 
         $annonce->update([
             'nb_vue'=>DB::raw('nb_vue+1')
@@ -121,7 +123,7 @@ class AnnonceController extends Controller
 
         $annonces_similaires = SousCategory::find($annonce->sous_category->id);
 
-        return view('pages/show_annonce' ,['annonce'=>$annonce,'annonces_similaires'=>$annonces_similaires->annonces,'favorisCount'=>$favorisCount]);
+        return view('pages.show_annonce' ,['annonce'=>$annonce,'annonces_similaires'=>$annonces_similaires->annonces,'favorisCount'=>$favorisCount]);
     }
 
     /**
