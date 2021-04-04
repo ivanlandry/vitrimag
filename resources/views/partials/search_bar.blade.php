@@ -9,16 +9,17 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur
                         perferendis.</p>
                 </div>
-                <form method="get" class="search-jobs-form">
+                <form method="get" action="{{ route('annonce.search') }}" class="search-jobs-form">
+                    @csrf
                     <div class="row mb-5">
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <input type="text" class="form-control form-control-lg" name="contenu" placeholder="tapez votre recherche">
+                            <input type="search" class="form-control form-control-lg" name="q" placeholder="tapez votre recherche" value="{{ request()->q ?? '' }}">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
                                     data-live-search="true" title="ville" name="ville">
                                 <option>Anywhere</option>
-
+                                <option value="bafoussam">bafoussam</option>
                             </select>
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -26,7 +27,7 @@
                                @foreach($categories as $categorie)
                                    <optgroup label="{{ $categorie->titre }}">{{ $categorie->titre }}</optgroup>
                                    @foreach($categorie->sous_categories as $sous_categorie)
-                                        <option>{{ $sous_categorie->titre }}</option>
+                                        <option value="{{ $sous_categorie->id }}">{{ $sous_categorie->titre }}</option>
                                     @endforeach
                                 @endforeach
                             </select>

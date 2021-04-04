@@ -22,14 +22,14 @@ class AnnonceController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show', 'search', 'filter']);
     }
 
     public function index()
     {
-        $annonces = Annonce::publier()->get();
+        $annonces = Annonce::publier()->orderBy('id', 'DESC')->get();
 
-        return view('pages.annonces',['annonces'=>$annonces]);
+        return view('pages.annonces', ['annonces' => $annonces, 'categories' => Category::categories()->get()]);
     }
 
     /**
@@ -101,6 +101,52 @@ class AnnonceController extends Controller
         abort(404);
     }
 
+    public function filter($sort)
+    {
+
+        $sort_prix = "prix";
+        $sort_date = "date";
+
+        $annonces = "";
+
+        if ($sort == $sort_prix) {
+            $annonces = Annonce::publier()->orderBy('prix', 'ASC')->get();
+
+        }
+        if ($sort == $sort_date) {
+            $annonces = Annonce::publier()->orderBy('created_at', 'ASC')->get();
+        }
+
+        return view('pages.filter', ['annonces' => $annonces, 'categories' => Category::categories()->get(),'sort'=>$sort]);
+    }
+
+
+    public function search()
+    {
+        $q = request()->input('q');
+        $ville = request()->input('ville');
+        $sous_categorie_id = request()->input('sous_categorie');
+
+
+        if ($q == null and $ville != null) {
+            $annonces = Annonce::publier()->where('ville', 'like', "%{$ville}%")->where('sous_category_id', $sous_categorie_id)->get();
+
+        } else if ($ville == null and $q != null) {
+            $annonces = Annonce::publier()->where('titre', 'like', "%{$q}%")
+                ->orWhere('description', 'like', "%{$q}%")->get();
+        } else if ($q == null and $ville == null) {
+            $annonces = Annonce::publier()->where('sous_category_id', $sous_categorie_id)->get();
+
+        } else {
+            $annonces = Annonce::publier()->where('titre', 'like', "%{$q}%")
+                ->orwhere('description', 'like', "%{$q}%")
+                ->where('ville', 'like', "%{$ville}%")
+                ->get();
+        }
+
+        return view('pages.search', ['annonces' => $annonces, 'categories' => Category::categories()->get()]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -109,21 +155,21 @@ class AnnonceController extends Controller
      */
     public function show($id)
     {
-        $annonce = Annonce::publier()->where('id',$id)->firstOrFail();
+        $annonce = Annonce::publier()->where('id', $id)->firstOrFail();
 
         $annonce->update([
-            'nb_vue'=>DB::raw('nb_vue+1')
+            'nb_vue' => DB::raw('nb_vue+1')
         ]);
 
-        $favorisCount=0;
+        $favorisCount = 0;
 
-       if (Auth::user()){
-           $favorisCount = count(Favoris::where('annonce_id',Annonce::find($id)->id)->where('user_id',Auth::user()->id)->get());
-       }
+        if (Auth::user()) {
+            $favorisCount = count(Favoris::where('annonce_id', Annonce::find($id)->id)->where('user_id', Auth::user()->id)->get());
+        }
 
         $annonces_similaires = SousCategory::find($annonce->sous_category->id);
 
-        return view('pages.show_annonce' ,['annonce'=>$annonce,'annonces_similaires'=>$annonces_similaires->annonces,'favorisCount'=>$favorisCount]);
+        return view('pages.show_annonce', ['annonce' => $annonce, 'annonces_similaires' => $annonces_similaires->annonces, 'favorisCount' => $favorisCount]);
     }
 
     /**
@@ -142,7 +188,8 @@ class AnnonceController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response     */
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
 
@@ -156,7 +203,7 @@ class AnnonceController extends Controller
      */
     public function destroy($id)
     {
-        if (File::exists(public_path('storage/' . Annonce::find($id)->img_1)) and File::exists(public_path('storage/' . Annonce::find($id)->img_2)) and File::exists(public_path('storage/'.Annonce::find($id)->img_3)) ) {
+        if (File::exists(public_path('storage/' . Annonce::find($id)->img_1)) and File::exists(public_path('storage/' . Annonce::find($id)->img_2)) and File::exists(public_path('storage/' . Annonce::find($id)->img_3))) {
 
             File::delete(public_path('storage/' . Annonce::find($id)->img_1));
             File::delete(public_path('storage/' . Annonce::find($id)->img_2));

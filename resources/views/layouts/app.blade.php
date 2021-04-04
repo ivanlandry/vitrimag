@@ -96,9 +96,11 @@
         },
         ajaxStop: function () {
             $(".loading").css('display', 'none');
-
         }
     });
+
+
+
 </script>
 @yield('extra-script')
 

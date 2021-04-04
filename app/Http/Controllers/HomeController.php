@@ -15,6 +15,6 @@ class HomeController extends Controller
 
         $annonces =  Annonce::publier()->whereDate('created_at',date('Y-m-d'))->with('sous_category')->get();
 
-        return view('home',['annonces'=>$annonces,'categories'=>Category::with('sous_categories')->get()]);
+        return view('home',['annonces'=>$annonces,'categories'=>Category::categories()->get()]);
     }
 }

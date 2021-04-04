@@ -22,6 +22,9 @@ Route::get('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'sho
 Route::delete('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'destroy'])->name('delete_annonce');
 Route::put('annonce/{id}', [\App\Http\Controllers\AnnonceController::class, 'update'])->name('update_annonce');
 Route::get('annonces/', [\App\Http\Controllers\AnnonceController::class, 'index'])->name('all_annonce');
+Route::get('search/', [\App\Http\Controllers\AnnonceController::class, 'search'])->name('annonce.search');
+Route::get('filter/sortBy={sort}', [\App\Http\Controllers\AnnonceController::class, 'filter'])->name('annonce.filter');
+
 
 
 Route::post('getSousCategorie/', [\App\Http\Controllers\AnnonceController::class, 'getSousCategorie'])->name('getSousCategorie');

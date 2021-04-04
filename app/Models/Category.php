@@ -11,6 +11,10 @@ class Category extends Model
 
   protected $guarded=[];
 
+    public function scopeCategories($query){
+        return $query->with('sous_categories');
+    }
+
     public function sous_categories(){
         return $this->hasMany(SousCategory::class);
     }
