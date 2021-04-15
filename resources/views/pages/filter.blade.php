@@ -1,5 +1,5 @@
 @extends('pages.annonces')
 
-@section('search')
+@section('content')
         @parent
 @endsection

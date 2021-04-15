@@ -32,9 +32,7 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ route('admin') }}" class="nav-link">Accueil</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
+
         </ul>
 
         <!-- Right navbar links -->
@@ -136,8 +134,62 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
-                    @yield('content')
+                <div class="row mt-4">
+                    @section('content')
+
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>150</h3>
+
+                                        <p>Utilisateurs</p>
+                                    </div>
+
+                                    <a href="{{ route('users.index') }}" class="small-box-footer">plus <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <h3>{{ count(\App\Models\Category::all()) }}</h3>
+
+                                        <p>Categories</p>
+                                    </div>
+
+                                    <a href="{{ route('categories.index') }}" class="small-box-footer">plus <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-warning">
+                                    <div class="inner">
+                                        <h3>{{ count(\App\Models\SousCategory::all()) }}</h3>
+
+                                        <p>Sous categories</p>
+                                    </div>
+
+                                    <a href="{{ route('sous-categories.index') }}" class="small-box-footer">plus <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-danger">
+                                    <div class="inner">
+                                        <h3>{{ count(\App\Models\Annonce::all() )}}</h3>
+
+                                        <p>Annonces</p>
+                                    </div>
+
+                                    <a href="{{ route('annonce.index') }}" class="small-box-footer">plus <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                    @show
                 </div>
             </div>
         </div>
@@ -155,15 +207,6 @@
     </aside>
     <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-            Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
 </div>
 <!-- ./wrapper -->
 

@@ -8,7 +8,8 @@
 
 @section('content')
 
-    <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');"
+    <section class="section-hero overlay inner-page bg-image"
+             style="background-image: url('{{ \App\Models\Setting::first()==null? 'asset("images/hero_1.jpg")': asset('storage/'.\App\Models\Setting::first()->banner_home) }}');"
              id="home-section">
         <div class="container">
             <div class="row">
@@ -107,7 +108,8 @@
                     <div class="bg-light p-3 border rounded mb-4">
                         <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Details</h3>
                         <ul class="list-unstyled pl-3 mb-0">
-                            <li class="mb-2"><strong class="text-black">Postée :</strong> {{ $annonce->created_at->diffForHumans() }}</li>
+                            <li class="mb-2"><strong class="text-black">Postée
+                                    :</strong> {{ $annonce->created_at->diffForHumans() }}</li>
                             <li class="mb-2"><strong
                                     class="text-black">Catégorie:</strong> {{ $annonce->sous_category->titre }}</li>
                             <li class="mb-2"><strong class="text-black">Ville:</strong> {{ $annonce->ville }}</li>
@@ -171,6 +173,22 @@
             </ul>
 
         </div>
+
+        <div class="container">
+
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <h2 class="section-title mb-2">Qu'avez vous à vendre ?</h2>
+                    <p>Vendez tout ce que vous voulez gratuitement sur Vitrimag</p>
+                </div>
+
+                <div class="col-6">
+                    <a href="{{ route('add_annonce_get') }}"
+                       class="btn btn-block btn-primary btn-md"> Publiez votre annonce gratuitement </a>
+                </div>
+            </div>
+        </div>
+
     </section>
 
 @endsection

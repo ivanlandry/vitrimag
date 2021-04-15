@@ -8,14 +8,6 @@
                     <li><a href="{{ route('all_annonce') }}" onclick="window.location.href=this.getAttribute('href');"
                            class="nav-link active">Anonces</a></li>
 
-                    <li class="has-children">
-                        <a href="#">Catégories</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Job Single</a></li>
-                            <li><a href="#">Post a Job</a></li>
-                            <hr>
-                        </ul>
-                    </li>
 
                     <li><a href="contact.html">Contact</a></li>
                     <li class="has-children">

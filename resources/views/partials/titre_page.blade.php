@@ -1,4 +1,4 @@
-<section class="section-hero overlay inner-page bg-image" style="background-image: url({{ asset('images/hero_1.jpg') }});"
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('{{\App\Models\Setting::first()==null? ' asset("images/hero_1.jpg")' : asset('storage/'.\App\Models\Setting::first()->banner_home) }}');");"
          id="home-section">
     <div class="container">
         <div class="row">

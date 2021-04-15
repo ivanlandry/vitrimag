@@ -6,15 +6,17 @@
 @endsection
 @section('banner_page')
 
-    @include('partials.search_bar')
-
+   @section('banner_page')
+       @include('partials.titre_page',['name_page'=>'Toutes les annonces'])
+   @show
 @endsection
 
+@section('content')
 
 @section('content')
-@section('search')
     <section class="site-section">
         <div class="container">
+
             <div class="row mb-5 justify-content-center">
                 <div class="col-md-7">
                     <h2 class="section-title mb-2">Toutes les annonces</h2>

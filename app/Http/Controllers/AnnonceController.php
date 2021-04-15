@@ -20,18 +20,27 @@ class AnnonceController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show', 'search', 'filter']);
+        $this->middleware('auth')->except(['index', 'show', 'search', 'filter','showSousCategory']);
     }
 
     public function index()
     {
         $annonces = Annonce::publier()->orderBy('id', 'DESC')->get();
 
-        return view('pages.annonces', ['annonces' => $annonces, 'categories' => Category::categories()->get()]);
+        return view('pages.annonces', ['annonces' => $annonces, 'categories' => Category::categories()->get(),'sort'=>null]);
     }
 
+    public function showSousCategory($id){
+
+        $sous_category = SousCategory::find($id);
+
+        $annonces = $sous_category->annonces;
+
+        return view('pages.categorie', ['annonces' => $annonces, 'categories' => Category::categories()->get(),'sort'=>null,'sous_category'=>$sous_category]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -144,7 +153,7 @@ class AnnonceController extends Controller
                 ->get();
         }
 
-        return view('pages.search', ['annonces' => $annonces, 'categories' => Category::categories()->get()]);
+        return view('pages.search', ['annonces' => $annonces, 'categories' => Category::categories()->get(),'sort'=>null]);
     }
 
     /**

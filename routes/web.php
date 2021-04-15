@@ -25,7 +25,7 @@ Route::get('annonces/', [\App\Http\Controllers\AnnonceController::class, 'index'
 Route::get('search/', [\App\Http\Controllers\AnnonceController::class, 'search'])->name('annonce.search');
 Route::get('filter/sortBy={sort}', [\App\Http\Controllers\AnnonceController::class, 'filter'])->name('annonce.filter');
 
-
+Route::get('categorie/{id}',[\App\Http\Controllers\AnnonceController::class,'showSousCategory'])->name('show_category');
 
 Route::post('getSousCategorie/', [\App\Http\Controllers\AnnonceController::class, 'getSousCategorie'])->name('getSousCategorie');
 
@@ -42,9 +42,13 @@ Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::view('/', 'back.app')->name('admin');
         Route::get('page', [\App\Http\Controllers\back\PageController::class, 'create'])->name('page');
+
         Route::get('parametres', [\App\Http\Controllers\back\SettingController::class, 'index'])->name('setting');
+        Route::post('parametres/update_banner_home', [\App\Http\Controllers\back\SettingController::class, 'update_banner_home'])->name('setting.update_banner_home');
+
         Route::resource('categories', \App\Http\Controllers\back\CategorieController::class);
         Route::resource('sous-categories', \App\Http\Controllers\back\SousCategorieController::class);
+
         Route::get('annonces', [\App\Http\Controllers\back\AnnonceController::class, 'index'])->name('annonce.index');
         Route::put('annonces/{id}', [\App\Http\Controllers\back\AnnonceController::class, 'valider_annonce'])->name('annonce.valider');
         Route::delete('annonces/{id}', [\App\Http\Controllers\back\AnnonceController::class, 'destroy'])->name('annonce.destroy');

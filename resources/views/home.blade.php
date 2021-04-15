@@ -24,9 +24,9 @@
                     <div class=" col-md-3" >
                         <img src="{{ asset('storage/'.$categorie->image) }}" class="card-img-top" alt="" width="10" height="180">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="#" class="text-dark" style="text-decoration: none;"><strong>{{ $categorie->titre }}</strong></a></h5>
+                            <h5 class="card-title"><a href="#" onclick="event.preventDefault();" class="text-dark" style="text-decoration: none;"><strong>{{ $categorie->titre }}</strong></a></h5>
                             @foreach( $categorie->sous_categories as $sous_categorie)
-                                <p class="card-text"><a href="" class="text-dark" style="text-decoration: none;">{{ $sous_categorie->titre}}</a></p>
+                                <p class="card-text"><a href="{{ route('show_category',$sous_categorie) }}" class="text-dark" style="text-decoration: none;">{{ $sous_categorie->titre}}</a></p>
                             @endforeach
                         </div>
                     </div>

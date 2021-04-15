@@ -1,4 +1,5 @@
-<section class="home-section section-hero overlay bg-image" style="background-image: url('images/hero_1.jpg');"
+<section class="home-section section-hero overlay bg-image"
+         style="background-image: url('{{\App\Models\Setting::first()==null? ' asset("images/hero_1.jpg")' : asset('storage/'.\App\Models\Setting::first()->banner_home) }}');"
          id="home-section">
 
     <div class="container">
@@ -13,7 +14,8 @@
                     @csrf
                     <div class="row mb-5">
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <input type="search" class="form-control form-control-lg" name="q" placeholder="tapez votre recherche" value="{{ request()->q ?? '' }}">
+                            <input type="search" class="form-control form-control-lg" name="q"
+                                   placeholder="tapez votre recherche" value="{{ request()->q ?? '' }}">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
@@ -24,9 +26,9 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <select class="form-control" title="categorie" name="sous_categorie">
-                               @foreach($categories as $categorie)
-                                   <optgroup label="{{ $categorie->titre }}">{{ $categorie->titre }}</optgroup>
-                                   @foreach($categorie->sous_categories as $sous_categorie)
+                                @foreach($categories as $categorie)
+                                    <optgroup label="{{ $categorie->titre }}">{{ $categorie->titre }}</optgroup>
+                                    @foreach($categorie->sous_categories as $sous_categorie)
                                         <option value="{{ $sous_categorie->id }}">{{ $sous_categorie->titre }}</option>
                                     @endforeach
                                 @endforeach
@@ -38,7 +40,6 @@
                             </button>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -47,7 +48,6 @@
     <a href="#next" class="scroll-button smoothscroll">
         <span class=" icon-keyboard_arrow_down"></span>
     </a>
-
 </section>
 
 <br>
